@@ -1,13 +1,6 @@
-const item2 = document.querySelector('.list-group-item:nth-child(2)');
-item2.style.backgroundColor = 'green';
-
-const listItem = document.querySelector('.list-group-item:nth-child(3)');
-listItem.style.display = "none";
-
-const item = document.querySelectorAll('.list-group-item');
-item[1].style.color = 'green';
-
-const odd = document.querySelectorAll('.list-group-item:nth-child(odd)');
-for (var i = 0; i < odd.length; i++) {
- odd[i].style.backgroundColor = 'green';
-}
+const headerTitle = document.querySelector("#header-title");
+const helloText = document.createTextNode("Hello ");
+headerTitle.parentElement.insertBefore(helloText, headerTitle.parentElement.firstElementChild);
+const itemsList = document.querySelector("#items");
+const helloText2 = document.createTextNode("Hello ");
+itemsList.insertBefore(helloText2, itemsList.firstElementChild);
