@@ -1,26 +1,16 @@
-function addItem(e) 
-{
+function addItem(e) {
   e.preventDefault();
   var itemName = document.getElementById('itemName').value;
   var itemDesc = document.getElementById('itemDesc').value;
-  var userDetails =
-  {
+  var userDetails = {
     itemName: itemName,
     itemDesc: itemDesc
   };
  
-  if (localStorage.getItem('userDetails') === null)
-   {
-    var userDetailsArr = [];
-    userDetailsArr.push(userDetails);
-    localStorage.setItem('userDetails', JSON.stringify(userDetailsArr));
-   }
-    else
-    {
-    var userDetailsArr = JSON.parse(localStorage.getItem('userDetails'));
-    userDetailsArr.push(userDetails);
-    localStorage.setItem('userDetails', JSON.stringify(userDetailsArr));
-   }
+  var userDetailsArr = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : [];
+  userDetailsArr.push(userDetails);
+  localStorage.setItem('userDetails', JSON.stringify(userDetailsArr));
+
   var li = document.createElement('li');
   li.className = 'list-group-item';
   var nameSpan = document.createElement('span');
