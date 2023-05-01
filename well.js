@@ -1,3 +1,5 @@
+var allUserDetails = JSON.parse(localStorage.getItem('userDetails')) || [];
+
 function addItem(e) {
   e.preventDefault();
   var itemName = document.getElementById('itemName').value;
@@ -7,9 +9,11 @@ function addItem(e) {
     itemDesc: itemDesc
   };
  
-  var userDetailsArr = localStorage.getItem('userDetails') ? JSON.parse(localStorage.getItem('userDetails')) : [];
-  userDetailsArr.push(userDetails);
-  localStorage.setItem('userDetails', JSON.stringify(userDetailsArr));
+  // Append new user details to the existing list of user details
+  allUserDetails.push(userDetails);
+
+  // Save all user details to local storage
+  localStorage.setItem('userDetails', JSON.stringify(allUserDetails));
 
   var li = document.createElement('li');
   li.className = 'list-group-item';
