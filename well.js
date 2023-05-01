@@ -1,17 +1,13 @@
-var ul=document.querySelector('ul');
-var li=document.createElement('li');
-ul.append(li);
+const item2 = document.querySelector('.list-group-item:nth-child(2)');
+item2.style.backgroundColor = 'green';
 
-li.setAttribute('class','title');
-li.innerText='hello';
-li.style.color='red';
-li.style.fontSize='2rem';
+const listItem = document.querySelector('.list-group-item:nth-child(3)');
+listItem.style.display = "none";
 
+const item = document.querySelectorAll('.list-group-item');
+item[1].style.color = 'green';
 
-var li2=document.getElementsByTagName('li');
-li2[1].style.color='blue';
-var li3=document.getElementsByClassName('list-group-item');
-li3[2].style.color='red';
-
-
-
+const odd = document.querySelectorAll('.list-group-item:nth-child(odd)');
+for (var i = 0; i < odd.length; i++) {
+ odd[i].style.backgroundColor = 'green';
+}
