@@ -2,17 +2,26 @@ var form = document.getElementById('addForm');
 var itemList = document.getElementById('items');
 var filter = document.getElementById('filter');
 form.addEventListener('submit', addItem);
-itemList.addEventListener('click', function(e)
-{
+itemList.addEventListener('click', function(e) {
   removeOrEditItem(e);
 });
 filter.addEventListener('keyup', filterItems);
-function addItem(e){
+
+function addItem(e) {
   e.preventDefault();
-  var newItem = document.getElementById('item').value;
+  var itemName = document.getElementById('itemName').value;
+  var itemDesc = document.getElementById('itemDesc').value;
   var li = document.createElement('li');
   li.className = 'list-group-item';
-  li.appendChild(document.createTextNode(newItem));
+  var nameSpan = document.createElement('span');
+  nameSpan.className = 'item-name';
+  nameSpan.appendChild(document.createTextNode(itemName));
+  li.appendChild(nameSpan);
+  li.appendChild(document.createElement('br'));
+  var descSpan = document.createElement('span');
+  descSpan.className = 'item-desc';
+  descSpan.appendChild(document.createTextNode(itemDesc));
+  li.appendChild(descSpan);
   var deleteBtn = document.createElement('button');
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
   deleteBtn.appendChild(document.createTextNode('X'));
@@ -23,32 +32,25 @@ function addItem(e){
   li.appendChild(editBtn);
   itemList.appendChild(li);
 }
-function removeOrEditItem(e)
-{
-  if(e.target.classList.contains('delete'))
-  {
-    if(confirm('Are You Sure?'))
-    {
+
+function removeOrEditItem(e) {
+  if (e.target.classList.contains('delete')) {
+    if (confirm('Are You Sure?')) {
       var li = e.target.parentElement;
       itemList.removeChild(li);
     }
-  } 
-  else if(e.target.classList.contains('edit'))
-  {
-  }
+  } else if (e.target.classList.contains('edit')) {}
 }
-function filterItems(e)
-{
+
+function filterItems(e) {
   var text = e.target.value.toLowerCase();
   var items = itemList.getElementsByTagName('li');
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1)
-    {
+  Array.from(items).forEach(function(item) {
+    var itemName = item.querySelector('.item-name').textContent.toLowerCase();
+    var itemDesc = item.querySelector('.item-desc').textContent.toLowerCase();
+    if (itemName.indexOf(text) !== -1 || itemDesc.indexOf(text) !== -1) {
       item.style.display = 'block';
-    } 
-    else 
-    {
+    } else {
       item.style.display = 'none';
     }
   });
